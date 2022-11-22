@@ -13,5 +13,5 @@ import javax.validation.constraints.NotBlank;
 @Validated
 public class FileNameInRequest {
     @NotBlank
-    private String name;
+    private String filename;
 }

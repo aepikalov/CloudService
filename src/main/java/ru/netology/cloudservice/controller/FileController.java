@@ -44,8 +44,8 @@ public class FileController {
     }
 
     @PutMapping
-    public void editFile(@RequestHeader("auth-token") @NotBlank String authToken, @NotBlank String filename, @Valid @RequestBody FileNameInRequest fileName) {
+    public void editFile(@RequestHeader("auth-token") @NotBlank String authToken, @NotBlank String filename, @Valid @RequestBody FileNameInRequest newFilename) {
         authorizationService.checkToken(authToken);
-        fileService.editFileName(filename, fileName.getName());
+        fileService.editFileName(filename, newFilename.getFilename());
     }
 }

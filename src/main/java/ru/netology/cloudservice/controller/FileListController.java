@@ -26,7 +26,8 @@ public class FileListController {
     }
 
     @GetMapping
-    public List<FileDescriptionInResponse> getFileList(@RequestHeader("auth-token") @NotBlank String authToken, @Min(1) int limit) {
+    public List<FileDescriptionInResponse> getFileList(@RequestHeader("auth-token")
+                                                           @NotBlank String authToken, @Min(1) int limit) {
         authorizationService.checkToken(authToken);
         return fileService.getFileList(limit);
     }

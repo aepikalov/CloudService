@@ -35,8 +35,8 @@ public class FileService {
     public synchronized void editFileName(String oldFilename, String newFilename) {
         final FileEntity fileEntity = getFileByName(oldFilename);
         final FileEntity newFileEntity = new FileEntity(newFilename, fileEntity.getFileContent());
-        fileRepository.save(newFileEntity);
         fileRepository.delete(fileEntity);
+        fileRepository.save(newFileEntity);
     }
 
     public List<FileDescriptionInResponse> getFileList(int limit) {

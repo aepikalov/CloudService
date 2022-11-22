@@ -13,10 +13,10 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 class AuthorizationServiceTest {
-    public static final String AUTH_TOKEN = "777";
+    public static final String AUTH_TOKEN = "Bearer 777";
     public static final String UNKNOWN_AUTH_TOKEN = "123";
     public static final String EXISTING_USER = "pikalov";
-    public static final String NOT_EXISTING_USER = "ivanov";
+    public static final String NOT_EXISTING_USER = "petrov";
     public static final String CORRECT_PASSWORD = "password";
 
     private final UserRepository userRepository = createUserRepositoryMock();
@@ -31,7 +31,7 @@ class AuthorizationServiceTest {
 
     private TokenRepository createTokenRepositoryMock() {
         final TokenRepository tokenRepository = Mockito.mock(TokenRepository.class);
-        when(tokenRepository.existsById(AUTH_TOKEN)).thenReturn(true);
+        when(tokenRepository.existsById(AUTH_TOKEN.split(" ")[1].trim())).thenReturn(true);
         when(tokenRepository.existsById(UNKNOWN_AUTH_TOKEN)).thenReturn(false);
         return tokenRepository;
     }

@@ -64,7 +64,7 @@ class CloudServiceApplicationTests {
 
     @Test
     public void testLogout() {
-        final String authToken = "777";
+        final String authToken = "Bearer 777";
         tokenRepository.save(new TokenEntity(authToken));
 
         final HttpHeaders headers = new HttpHeaders();
@@ -72,13 +72,13 @@ class CloudServiceApplicationTests {
         final HttpEntity<Void> request = new HttpEntity<>(null, headers);
 
         this.restTemplate.postForEntity("/logout", request, Void.class);
-        Assertions.assertFalse(tokenRepository.existsById("777"));
+        Assertions.assertFalse(tokenRepository.existsById(authToken.split(" ")[1].trim()));
     }
 
     @Test
     public void testUploadFile() {
-        final String authToken = "777";
-        tokenRepository.save(new TokenEntity(authToken));
+        final String authToken = "Bearer 777";
+        tokenRepository.save(new TokenEntity(authToken.split(" ")[1].trim()));
 
         final HttpHeaders headers = new HttpHeaders();
         headers.set("auth-token", authToken);
@@ -99,8 +99,8 @@ class CloudServiceApplicationTests {
     public void testDeleteFile() {
         fileRepository.save(new FileEntity("testing.txt", new byte[]{49, 51, 50}));
 
-        final String authToken = "777";
-        tokenRepository.save(new TokenEntity(authToken));
+        final String authToken = "Bearer 777";
+        tokenRepository.save(new TokenEntity(authToken.split(" ")[1].trim()));
 
         final HttpHeaders headers = new HttpHeaders();
         headers.set("auth-token", authToken);
@@ -116,8 +116,8 @@ class CloudServiceApplicationTests {
     public void testGetFile() {
         fileRepository.save(new FileEntity("testing.txt", new byte[]{49, 51, 50}));
 
-        final String authToken = "777";
-        tokenRepository.save(new TokenEntity(authToken));
+        final String authToken = "Bearer 777";
+        tokenRepository.save(new TokenEntity(authToken.split(" ")[1].trim()));
 
         final HttpHeaders headers = new HttpHeaders();
         headers.set("auth-token", authToken);
@@ -134,8 +134,8 @@ class CloudServiceApplicationTests {
     public void testEditFile() {
         fileRepository.save(new FileEntity("testing.txt", new byte[]{49, 51, 50}));
 
-        final String authToken = "777";
-        tokenRepository.save(new TokenEntity(authToken));
+        final String authToken = "Bearer 777";
+        tokenRepository.save(new TokenEntity(authToken.split(" ")[1].trim()));
 
         final HttpHeaders headers = new HttpHeaders();
         headers.set("auth-token", authToken);
@@ -155,8 +155,8 @@ class CloudServiceApplicationTests {
     public void testGetFileList() {
         fileRepository.save(new FileEntity("testing.txt", new byte[]{49, 51, 50}));
 
-        final String authToken = "777";
-        tokenRepository.save(new TokenEntity(authToken));
+        final String authToken = "Bearer 777";
+        tokenRepository.save(new TokenEntity(authToken.split(" ")[1].trim()));
 
         final HttpHeaders headers = new HttpHeaders();
         headers.set("auth-token", authToken);

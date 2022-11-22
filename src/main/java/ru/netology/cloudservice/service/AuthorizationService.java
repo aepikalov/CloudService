@@ -43,11 +43,11 @@ public class AuthorizationService {
     }
 
     public void logout(String authToken) {
-        tokenRepository.deleteById(authToken);
+        tokenRepository.deleteById(authToken.split(" ")[1].trim());
     }
 
     public void checkToken(String authToken) {
-        if (!tokenRepository.existsById(authToken)) {
+        if (!tokenRepository.existsById(authToken.split(" ")[1].trim())) {
             throw new AuthorizationException();
         }
     }
